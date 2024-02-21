@@ -1,5 +1,6 @@
 package telran.java51.accounting.service;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 			throw new UserExistsException();
 		}
 		UserAccount userAccount = modelMapper.map(userRegisterDto, UserAccount.class);
+		userAccount.setPassword(BCrypt.hashpw(userAccount.getPassword(), BCrypt.gensalt()));
 		userAccountRepository.save(userAccount);
 		return modelMapper.map(userAccount, UserDto.class);
 	}

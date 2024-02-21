@@ -27,6 +27,7 @@ public class UserAccountController {
 	public UserDto register(@RequestBody UserRegisterDto userRegisterDto) {
 		return userAccountService.register(userRegisterDto);
 	}
+	
 
 	@GetMapping("/user/{login}")
 	public UserDto getUser(@PathVariable String login) {
